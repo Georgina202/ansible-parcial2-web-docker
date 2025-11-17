@@ -1,1 +1,16 @@
+---
+- name: Configurar servidor web con Docker
+  hosts: webservers
+  become: false
+
+  tasks:
+    - name: Crear contenedor nginx
+      community.docker.docker_container:
+        name: webansible
+        image: nginx:latest
+        state: started
+        ports:
+          - "8080:80"
+        volumes:
+          - ./html:/usr/share/nginx/html
 
